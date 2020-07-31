@@ -59,73 +59,95 @@ class Order
 
                                 case 'isphone':
                                     {
-                                        if ( strlen($this->phone) > 4)
+                                        if ((int)$value === 1)
+                                        {
+                                            if ( strlen($this->phone) > 4 && (int)$value === 1)
+                                                $keysAccept[$key] = true;
+                                        }
+                                        else
                                             $keysAccept[$key] = true;
                                     }
                                     break;
 
                                 case 'phonelastnum':
                                     {
-                                        if ( strlen($this->phone) > 4)
+                                        if ((int)$value === 1)
                                         {
-                                            $lastnum = substr( (int)$this->phone,-4);
-                                            if ($lastnum == $value)
-                                                $keysAccept[$key] = true;
+                                            if ( strlen($this->phone) > 4)
+                                            {
+                                                $lastnum = substr( (int)$this->phone,-4);
+                                                if ($lastnum == $value)
+                                                    $keysAccept[$key] = true;
+                                            }
                                         }
+                                        else
+                                            $keysAccept[$key] = true;
                                     }
                                     break;
 
                                 case 'isbornbefore':
                                     {
-                                        if ($this->date !== null)
+                                        if ((int)$value === 1)
                                         {
-                                            $timeOfBorn = strtotime($this->date);
-                                            $dayBorn = date("j", $timeOfBorn);
-                                            $monthBorn = date("n", $timeOfBorn);
+                                            if ($this->date !== null)
+                                            {
+                                                $timeOfBorn = strtotime($this->date);
+                                                $dayBorn = date("j", $timeOfBorn);
+                                                $monthBorn = date("n", $timeOfBorn);
 
-                                            $curYear = date("Y", $nowTime);
+                                                $curYear = date("Y", $nowTime);
 
-                                            //приводим дату рождения к текущему году
-                                            $dateTime = new \DateTime();
-                                            $dateTime->setTimestamp($timeOfBorn);
-                                            $dateTime->setDate($curYear, $monthBorn, $dayBorn);
+                                                //приводим дату рождения к текущему году
+                                                $dateTime = new \DateTime();
+                                                $dateTime->setTimestamp($timeOfBorn);
+                                                $dateTime->setDate($curYear, $monthBorn, $dayBorn);
 
-                                            $timeDayBorn = $dateTime->getTimestamp();
+                                                $timeDayBorn = $dateTime->getTimestamp();
 
-                                            $diff = $nowTime-$timeDayBorn;
-                                            $period1 = 6*24*3600;
-                                            $period2 = 7*24*3600;
+                                                $diff = $nowTime-$timeDayBorn;
+                                                $period1 = 6*24*3600;
+                                                $period2 = 7*24*3600;
 
-                                            if ( $diff > $period1 && $diff < $period2)
-                                                $keysAccept[$key] = true;
+                                                if ( $diff > $period1 && $diff < $period2)
+                                                    $keysAccept[$key] = true;
+                                            }
                                         }
+                                        else
+                                            $keysAccept[$key] = true;
                                     }
                                     break;
 
                                 case 'isbornafter':
                                     {
-                                        if ($this->date !== null)
+
+                                        if ((int)$value === 1)
                                         {
-                                            $timeOfBorn = strtotime($this->date);
-                                            $dayBorn = date("j", $timeOfBorn);
-                                            $monthBorn = date("n", $timeOfBorn);
+                                            if ($this->date !== null)
+                                            {
+                                                $timeOfBorn = strtotime($this->date);
+                                                $dayBorn = date("j", $timeOfBorn);
+                                                $monthBorn = date("n", $timeOfBorn);
 
-                                            $curYear = date("Y", $nowTime);
+                                                $curYear = date("Y", $nowTime);
 
-                                            //приводим дату рождения к текущему году
-                                            $dateTime = new \DateTime();
-                                            $dateTime->setTimestamp($timeOfBorn);
-                                            $dateTime->setDate($curYear, $monthBorn, $dayBorn);
+                                                //приводим дату рождения к текущему году
+                                                $dateTime = new \DateTime();
+                                                $dateTime->setTimestamp($timeOfBorn);
+                                                $dateTime->setDate($curYear, $monthBorn, $dayBorn);
 
-                                            $timeDayBorn = $dateTime->getTimestamp();
+                                                $timeDayBorn = $dateTime->getTimestamp();
 
-                                            $diff = $timeDayBorn-$nowTime;
-                                            $period1 = 6*24*3600;
-                                            $period2 = 7*24*3600;
+                                                $diff = $timeDayBorn-$nowTime;
+                                                $period1 = 6*24*3600;
+                                                $period2 = 7*24*3600;
 
-                                            if ( $diff > $period1 && $diff < $period2)
-                                                $keysAccept[$key] = true;
+                                                if ( $diff > $period1 && $diff < $period2)
+                                                    $keysAccept[$key] = true;
+                                            }
                                         }
+
+                                        else
+                                            $keysAccept[$key] = true;
                                     }
                                     break;
 
