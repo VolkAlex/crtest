@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Discounts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Products</th>
+                <th>Sex</th>
+                <th>Isphone</th>
+                <th>Phonelastnum</th>
+                <th>Begin</th>
+                <th>End</th>
+                <th>Discount</th>
+                <th>Isbornbefore</th>
+                <th>Isbornafter</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for discount in discounts %}
+            <tr>
+                <td><a href="{{ path('discount_show', { 'id': discount.id }) }}">{{ discount.id }}</a></td>
+                <td>{{ discount.products }}</td>
+                <td>{{ discount.sex }}</td>
+                <td>{% if discount.isphone %}Yes{% else %}No{% endif %}</td>
+                <td>{{ discount.phonelastnum }}</td>
+                <td>{% if discount.begin %}{{ discount.begin|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if discount.end %}{{ discount.end|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ discount.discount }}</td>
+                <td>{% if discount.isbornbefore %}Yes{% else %}No{% endif %}</td>
+                <td>{% if discount.isbornafter %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('discount_show', { 'id': discount.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('discount_edit', { 'id': discount.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('discount_new') }}">Create a new discount</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <form id="calculateForm">
+        <div class="form-group row">
+            <label for="FIO">ФИО</label>
+            <input type="text" name="name" class="form-control" id="FIO" required="required">
+        </div>
+
+        <div class="form-group row">
+            <label>Услуги</label>
+        </div>
+
+        {% for product in products %}
+            <div class="form-group form-check row">
+            <input type="checkbox" class="form-check-input" id="product{{ product.id }}" name="products" value="{{ product.id }}">
+            <label class="form-check-label" for="product{{ product.id }}">{{ product.name }}</label>
+            </div>
+        {% endfor %}
+
+        <div class="form-group row">
+            <label for="date">Дата рождения</label>
+            <input type="date" class="form-control" id="date" name="date" required="required">
+        </div>
+        <div class="form-group row">
+            <label for="phone">Телефон</label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+        </div>
+
+        <div class="form-group row">
+            <label>Пол</label>
+        </div>
+
+        <div class="form-check row">
+            <input class="form-check-input" type="radio" name="sex" id="femaleRadio" value="f" checked>
+            <label class="form-check-label" for="femaleRadio">
+                Женский
+            </label>
+        </div>
+
+        <div class="form-check row">
+            <input class="form-check-input" type="radio" name="sex" id="maleRadio" value="m">
+            <label class="form-check-label" for="maleRadio">
+                Мужской
+            </label>
+        </div>
+        <button id="calculateButton" type="submit" class="btn btn-primary">Рассчитать</button>
+        <button id="resetButton" type="button" class="btn btn-primary">Сброс</button>
+    </form>
+
+    {#toast of discount#}
+
+    <div  aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: absolute; top: 50%; right: 50%;" >
+        <div id="discountToast" class="toast" data-delay="10000" data-autohide="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Скидка!</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
